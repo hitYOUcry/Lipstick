@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lipstick</string>
+
+    <string name="welcome">Welcome   ^_^</string>
+
+    <string name="begin">开始抢口红</string>
+</resources>
