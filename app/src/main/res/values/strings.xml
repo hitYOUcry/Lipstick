@@ -4,4 +4,7 @@
     <string name="welcome">Welcome   ^_^</string>
 
     <string name="begin">开始抢口红</string>
+
+
+    <string name="net_error_hint">网络已断开，请检查网络连接情况！</string>
 </resources>
