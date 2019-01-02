@@ -1,4 +1,4 @@
-package com.swz.lipstick;
+package com.swz.lipstick.ac;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.swz.lipstick.R;
 
 public class SplashActivity extends Activity {
 
