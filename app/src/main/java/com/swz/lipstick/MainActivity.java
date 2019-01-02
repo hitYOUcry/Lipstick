@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
@@ -31,6 +32,15 @@ public class MainActivity extends Activity {
         webSettings.setSupportZoom(false);
         webSettings.setDefaultTextEncodingName("utf-8");
         webSettings.setLoadsImagesAutomatically(true);
+        webSettings.setJavaScriptEnabled(true);
+
+        mWb.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+        });
 
         mWb.requestFocusFromTouch();
 
