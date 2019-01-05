@@ -2,28 +2,25 @@ package com.swz.lipstick.ac;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.swz.lipstick.R;
 import com.swz.lipstick.monitor.INetInterface;
 import com.swz.lipstick.monitor.NetworkMonitor;
-import com.swz.lipstick.R;
 import com.swz.lipstick.ui.NetWorkView;
+import com.swz.lipstick.utils.X5WebView;
 
 public class MainActivity extends Activity implements INetInterface {
 
     private static final String TAG = "MainActivity_";
-    private static final String URL = "https://app.ibluesand.cn/app/index.php?i=29&c=entry&plugin=wap&do=reg&m=junsion_winaward_plugin_wap";
+    private static final String URL = "https://app.ibluesand.cn/app/index.php?i=1&c=entry&eid=25";
 
-    WebView mWb;
+    X5WebView mWb;
     Button mBtn;
     int mType;
     NetWorkView mErrorPage;
@@ -40,22 +37,22 @@ public class MainActivity extends Activity implements INetInterface {
         mBtn = findViewById(R.id.btn_begin);
         mWb = findViewById(R.id.webview);
 
-
-        WebSettings webSettings = mWb.getSettings();
-        webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setSupportZoom(false);
-        webSettings.setDefaultTextEncodingName("utf-8");
-        webSettings.setLoadsImagesAutomatically(true);
-        webSettings.setJavaScriptEnabled(true);
-
-        mWb.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-        });
+//
+//        WebSettings webSettings = mWb.getSettings();
+//        webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
+//        webSettings.setLoadWithOverviewMode(true);
+//        webSettings.setSupportZoom(false);
+//        webSettings.setDefaultTextEncodingName("utf-8");
+//        webSettings.setLoadsImagesAutomatically(true);
+//        webSettings.setJavaScriptEnabled(true);
+//
+//        mWb.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return super.shouldOverrideUrlLoading(view, url);
+//            }
+//        });
 
         mWb.requestFocusFromTouch();
 
@@ -107,26 +104,37 @@ public class MainActivity extends Activity implements INetInterface {
             return true;
         }
 
-        if (mType == 2 && mWb.getVisibility() == View.VISIBLE) {
-            mBtn.setVisibility(View.VISIBLE);
-            mWb.setVisibility(View.INVISIBLE);
-            mBtn.setClickable(true);
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if (mType == 2 && mWb.getVisibility() == View.VISIBLE) {
+                mBtn.setVisibility(View.VISIBLE);
+                mWb.setVisibility(View.INVISIBLE);
+                mBtn.setClickable(true);
 
-            ObjectAnimator wbAnim = ObjectAnimator.ofFloat(mWb, "alpha", 1f, 0f);
-            wbAnim.setDuration(1000);
+                ObjectAnimator wbAnim = ObjectAnimator.ofFloat(mWb, "alpha", 1f, 0f);
+                wbAnim.setDuration(1000);
 
-            ObjectAnimator btnAnim = ObjectAnimator.ofFloat(mBtn, "alpha", 0f, 1f);
-            btnAnim.setDuration(1000);
+                ObjectAnimator btnAnim = ObjectAnimator.ofFloat(mBtn, "alpha", 0f, 1f);
+                btnAnim.setDuration(1000);
 
-            wbAnim.start();
-            btnAnim.start();
+                wbAnim.start();
+                btnAnim.start();
 
-            return true;
+                return true;
+            }
         }
 
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onStop() {
+        if(isFinishing()){
+            if(mWb != null){
+                mWb.destroy();
+            }
+        }
+        super.onStop();
+    }
 
     @Override
     public void connected() {
