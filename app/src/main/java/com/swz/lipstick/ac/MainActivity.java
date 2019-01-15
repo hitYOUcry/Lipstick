@@ -18,7 +18,8 @@ import com.swz.lipstick.utils.X5WebView;
 public class MainActivity extends Activity implements INetInterface {
 
     private static final String TAG = "MainActivity_";
-    private static final String URL = "https://app.ibluesand.cn/app/index.php?i=1&c=entry&eid=25";
+//    private static final String URL = "https://app.ibluesand.cn/app/index.php?i=1&c=entry&eid=25";
+    private static final String URL = "https://www.paysapi.com/";
 
     X5WebView mWb;
     Button mBtn;

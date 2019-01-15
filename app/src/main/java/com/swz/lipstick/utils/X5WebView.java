@@ -2,11 +2,14 @@ package com.swz.lipstick.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.swz.lipstick.LSApp;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
@@ -19,10 +22,33 @@ public class X5WebView extends WebView {
 		 * 防止加载网页时调起系统浏览器
 		 */
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			view.loadUrl(url);
+
+			if (url.contains("platformapi/startapp")) {
+				startAlipayActivity(url);
+			} else if ((Build.VERSION.SDK_INT > Build.VERSION_CODES.M)
+					&& (url.contains("platformapi") && url.contains("startapp"))) {
+				startAlipayActivity(url);
+			} else {
+				view.loadUrl(url);
+			}
 			return true;
 		}
 	};
+
+	// 调起支付宝并跳转到指定页面
+	private void startAlipayActivity(String url) {
+		Intent intent;
+		try {
+			intent = Intent.parseUri(url,
+					Intent.URI_INTENT_SCHEME);
+			intent.addCategory(Intent.CATEGORY_BROWSABLE);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setComponent(null);
+			LSApp.me.startActivity(intent);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@SuppressLint("SetJavaScriptEnabled")
 	public X5WebView(Context arg0, AttributeSet arg1) {
