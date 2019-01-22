@@ -31,11 +31,37 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/view"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
             android:background="@drawable/btn_bg"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
             android:text="@string/begin"
+            android:textColor="@android:color/white"/>
+
+
+        <Button
+            android:id="@+id/btn_about_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_begin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_bg"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:text="@string/about_us"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_lipstick_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/btn_begin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_bg"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:text="@string/item_show"
             android:textColor="@android:color/white"/>
 
     </RelativeLayout>
